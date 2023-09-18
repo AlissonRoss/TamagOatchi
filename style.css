@@ -1,13 +1,76 @@
 body {
     margin: 0;
-    overflow: hidden;
+    background-color: #324732;
+    background-image: url('./background.png');
 }
 
-canvas {
-    display: block;
+header {
+    background-color: #282C34;
+    padding: 10px 0;
 }
-#scene{
-    height: 50vh;
-    width: 100vw;
-    background-color: darkolivegreen;
+
+header p {
+    margin: 0;
+    padding: 3px 0;
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+header button {
+    height: 4vh;
+    background-color: #1d4428;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    margin: 0.5em;
+    padding: 2px 12px;
+    cursor:pointer;
+}
+
+/* Read-only stat */
+header button:disabled {
+    background-color: transparent;
+    cursor: none;
+}
+
+header #action-bar {
+    display: flex;
+    justify-content: center;
+
+    /* Wrap should only occur on narrow screens */
+    flex-wrap: wrap;
+}
+
+/* Baseline styling for all possible Oatchi states */
+#oatchi {
+    /* We're not supporting older browsers, so min() assigned to width is fine */
+    width: min(400px, 66vw);
+    position: relative;
+
+    /* Center Oatchi horizontally as the baseline */
+    left: calc(50vw - min(400px, 66vw)/2);
+
+    /* Move Oatchi down a bit to give him room to hop */
+    top: 50vh;
+    transform: scaleX(1);
+
+    transition: left 1s linear, top 0.25s, transform 0.25s ease-out;
+}
+
+#oatchi.walk-edge {
+    left: 0;
+    transition: left 2s;
+}
+
+#oatchi.walk-edge.face-right {
+    left: calc(100vw - min(400px, 66vw));
+}
+
+#oatchi.face-right {
+    transform: scaleX(-1);
+}
+
+#oatchi.jump {
+    top: 0;
 }

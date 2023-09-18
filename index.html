@@ -7,13 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tamagoatchi</title>
     <link rel="stylesheet" href="./style.css">
-</head>
-<header>
-    <script src="./Oatchi.js"></script>
-    <script src="./AnimateOatchi.js"></script>
 
-</header>
+    <!-- Note! Scripts are executed before DOM is loaded which allows script
+        parsing and DOM parsing to execute in parallel, but the scripts won't
+        be able to find DOM elements until onload event -->
+    <script src="./Scene.js"></script>
+    <script src="./Main.js"></script>
+</head>
 <body>
-    <canvas id="scene"></canvas>
+    <header>
+        <p id="title">TamagOatchi Version 0.0</p>
+        <p id="time">Time</p>
+        <div id="action-bar">
+            <button id="food">Food</button>
+            <button id="cleanliness">Cleanliness</button>
+            <button id="sleep">Sleep</button>
+
+            <!-- Click Oatchi to play with him -->
+            <button id="play" disabled="true">Play</button>
+
+            <!-- He poops on his own time -->
+            <button id="poop" disabled="true">Treasure</button>
+        </div>
+    </header>
+    <img id="oatchi" src="./oatchi.png">
 </body>
+
 </html>
