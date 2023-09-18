@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+}
+#scene{
+    height: 50vh;
+    width: 100vw;
+    background-color: darkolivegreen;
+}
