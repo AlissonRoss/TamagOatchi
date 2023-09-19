@@ -6,7 +6,7 @@ class Scene {
                 value:   5, //DEFAULT value
                 min:     0, //MIN Value user can have
                 max:     8, //MAX value user can gain
-                tick:    -1/8, //Tick increment
+                tick:    -1/8, //Tick increment 1/8 of 1 second
                 click:   2, //Button Increments per click by 2
                 button:  null, //Button will be added later onLoad()
             },
@@ -66,7 +66,7 @@ class Scene {
         this.oatchi = document.getElementById("oatchi");
         this.oatchi.addEventListener("click", () => this.oatchiClicked());
         this.pendingEvent = 0;
-        // Referencing elements and setting them into buttons
+        // Referencing elements and setting them into the state's buttons
         this.state.hunger.button      = document.getElementById("food");
         this.state.cleanliness.button = document.getElementById("cleanliness");
         this.state.sleep.button       = document.getElementById("sleep");
@@ -96,11 +96,11 @@ class Scene {
         // Perform any cleanup or saving tasks here
     }
 
-    //the rate of change per ticks
+    //Instead of every action having its own setInterval(), they all share a single once a second update function
     tick() {
         // Rather than having separate interval events for each state, subtract a small amount from each state on every tick
         if (this.state.hunger.value > 0){
-            this.state.poop.tick = -this.state.hunger.tick;
+            this.state.poop.tick = -this.state.hunger.tick; //pooping is dependent on being full
         }
         else{
             // Can't poop if not fed
@@ -179,7 +179,7 @@ class Scene {
         // Preserve facing direction ("face-right")
         this.oatchi.classList.remove("walk-edge");
         this.oatchi.classList.add("jump"); //CSS Animation: translate Oatchi upwards
-        this.set_transition(() => this.oatchiGoIdle(), 300);
+        this.set_transition(() => this.oatchiGoIdle(), 200);
     }
 
     /// Assign correct animation image, remove unwanted CSS animation classes, and begin left/right walk sequence.

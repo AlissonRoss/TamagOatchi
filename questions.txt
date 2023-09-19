@@ -1,0 +1,23 @@
+Your project topic and how far you got with it
+
+*My project is a pet game and I was able to get the class, buttons, intervals for animations to work
+
+Any problems or difficulties you ran into and how you resolved them
+*Had difficulties with animations. I tried many different ways to handle them and settled on using CSS transforms, transitions, etc.
+
+What are some features you completed easily?
+*I was able to get the props for the Scene Class (Originally was Oatchi Class) done pretty quickly! Adding local time was also very easy
+
+What are some features you struggled with?
+*Struggled with the intervals and animating. I asked ChatGPT lots of questions about it. I easily spent 15 hrs last week on the Javascript code and animations minimum
+
+Things you learned (working together, working alone, process, content, syntax, etc)
+
+*I learned about transitions between the Idle animation to by removing or adding to the CSS classList. I also had tick() to handle every action update
+
+Why did you decide to create the project you did, and why did you choose the languages/libraries/frameworks you used.
+*I choose to make a petgame because I personally really enjoy pet games. The animations were ambitious. 
+
+If you could put 20 more hours of work into the project what would you do next?
+*I would add death function to my pet once all values are depleted, and also fix some of the placeholder animations
+I would also add a way to save the data to a JSON file
