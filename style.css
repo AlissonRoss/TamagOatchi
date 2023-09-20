@@ -41,6 +41,8 @@ div#action-bar {
     /* On mobile layouts, move action bar to bottom of screen where it's easier to reach with a thumb */
     div#action-bar {
         order: 1;
+        height:5vh;
+        padding-top: 1em;
     }
 }
 

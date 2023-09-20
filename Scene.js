@@ -37,7 +37,7 @@ class Scene {
         // because we're using multiple transition durations on different CSS fields.
         this.walkTransitionDuration = 2000;
 
-        this.feedDuration = 1000;
+        this.feedDuration = 2000;
         this.poopDuration = 3000;
         this.sleepingDuration = 10000;
         this.bathDuration = 5000;
