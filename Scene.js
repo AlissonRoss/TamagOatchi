@@ -224,7 +224,7 @@ class Scene {
     /// Walk to the center of the screen, then spend duration eating, then return to idle animation
     oatchiFeed() {
         this.oatchiWalkCenterThen(() => {
-            this.oatchi.src = "./Oatchi-feed.png";
+            this.oatchi.src = "./Oatchi-feed.gif";
             this.set_transition(() => {
                 // Fill up half the hunger bar up to its max at end of animation
                 Scene.incrementStat(this.state.hunger, this.state.hunger.max / 2);
@@ -236,7 +236,7 @@ class Scene {
     /// Walk to the center of the screen, then spend duration pooping, then return to idle animation
     oatchiPoop() {
         this.oatchiWalkCenterThen(() => {
-            this.oatchi.src = "./Oatchi-poop.png";
+            this.oatchi.src = "./Oatchi-poop.gif";
             this.set_transition(() => {
                 // Pop doesn't leave body until end of animation
                 this.state.poop.value = 0;
