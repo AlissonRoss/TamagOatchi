@@ -3,6 +3,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 header {
@@ -41,8 +42,11 @@ div#action-bar {
     /* On mobile layouts, move action bar to bottom of screen where it's easier to reach with a thumb */
     div#action-bar {
         order: 1;
-        height:5vh;
+        height:5svh;
         padding-top: 1em;
+    }
+    main{
+        max-height: 90vh;
     }
 }
 
