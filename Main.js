@@ -3,7 +3,7 @@ let timeDisplay = null;
 let tickIntervalId = 0;
 
 function sceneTick() {
-    scene.tick();
+    scene.updateScene();
     //displays time
     timeDisplay.textContent = `Time: ${(new Date()).toLocaleTimeString()}`;
 }

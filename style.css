@@ -1,7 +1,8 @@
 body {
+    height: 100vh;
     margin: 0;
-    background-color: #324732;
-    background-image: url('./background.png');
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -17,29 +18,54 @@ header p {
     text-align: center;
 }
 
-header button {
-    height: 4vh;
-    background-color: #1d4428;
-    color: white;
-    border-radius: 4px;
-    border: none;
-    margin: 0.5em;
-    padding: 2px 12px;
-    cursor:pointer;
+main {
+    flex-grow: 1;
+    background-color: #324732;
+    background-image: url('./background.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
 }
 
-/* Read-only stat */
-header button:disabled {
-    background-color: transparent;
-    cursor: none;
-}
-
-header #action-bar {
+div#action-bar {
+    background-color: #282C34;
+    padding: 10px 0;
     display: flex;
     justify-content: center;
 
     /* Wrap should only occur on narrow screens */
     flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 480px)
+{
+    /* On mobile layouts, move action bar to bottom of screen where it's easier to reach with a thumb */
+    div#action-bar {
+        order: 1;
+    }
+}
+
+div#action-bar button {
+    height: 4vh;
+    color: white;
+    border-radius: 4px;
+    margin: 0 2px;
+    padding: 2px 12px;
+    cursor:pointer;
+    border: 0.5px double gray;
+    
+    /* Make the bar chart color change with the progress. */
+    --progress: 0;
+    --color-progress: calc(min(var(--progress), 0.4) / 0.4); /* Don't transition color until under 40% full */
+    --color-fill: hsl(
+        calc(var(--color-progress) * var(--color-progress) * 120), /* Hue (red at 0, green at 120). Square progress to skip over yellow as quickly as possible */
+        calc((1 - var(--color-progress)) * 70% + 30%), /* Saturation increases as progress reaches 0 (empty) */
+        calc((1 - var(--color-progress)) * 25% + 25%)  /* The color gets brighter as progress reaches 0 (empty) */
+    );
+    background: linear-gradient(to top, var(--color-fill), var(--color-fill) calc(var(--progress) * 100%), transparent calc(var(--progress) * 100%), transparent 100%);
+}
+
+div#action-bar button#poop {
+    --color-fill: #AD6D57;
 }
 
 /* Baseline styling for all possible Oatchi states */
@@ -52,15 +78,20 @@ header #action-bar {
     left: calc(50vw - min(400px, 66vw)/2);
 
     /* Move Oatchi down a bit to give him room to hop */
-    top: 50vh;
+    top: calc(50vh - min(400px, 66vw)/2);
     transform: scaleX(1);
 
+    /* Top and left transitions smooth Oatchi's motion when walking and jumping */
+    /* Transform transition causes Oatchi to have a 3D-ish paper flip animation when turning around */
     transition: left 1s linear, top 0.25s, transform 0.25s ease-out;
 }
 
 #oatchi.walk-edge {
     left: 0;
-    transition: left 2s;
+
+    /* Slow down `left` transition since Oatchi will be walking twice as far */
+    /* If we specify only `left 2s` then the rest of the transitions would be removed */
+    transition: left 2s linear, top 0.25s, transform 0.25s ease-out;
 }
 
 #oatchi.walk-edge.face-right {
@@ -72,5 +103,5 @@ header #action-bar {
 }
 
 #oatchi.jump {
-    top: 30vh;
+    top: calc(30vh - min(400px, 66vw)/2);
 }
