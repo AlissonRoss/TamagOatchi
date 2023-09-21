@@ -240,6 +240,7 @@ class Scene {
             this.set_transition(() => {
                 // Pop doesn't leave body until end of animation
                 this.state.poop.value = 0;
+                Scene.incrementStat(this.state.cleanliness, -1);
                 this.oatchiGoIdle();
             }, this.poopDuration);
         })
