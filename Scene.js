@@ -59,10 +59,10 @@ class Scene {
         this.state.poop.button        = document.getElementById("poop");
 
         //Get items from local storage
-        // Object.keys(localStorage).forEach((key) => {
-        //     this.state[key].value = localStorage.getItem(key);
-        //     console.log(localStorage.getItem(key));
-        // });
+        Object.keys(this.state).forEach((key) => {
+            this.state[key].value = JSON.parse(localStorage.getItem(key));
+            console.log(localStorage.getItem(key));
+        });
         // Determine on a per-button basis which actions can override other actions.
         this.state.hunger.button.addEventListener("click", () => {
             if (this.isOatchiAvailable())
