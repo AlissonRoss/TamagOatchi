@@ -32,7 +32,7 @@ class Scene {
                 button:  null,
             }
         };
-
+       
         // Read this value from the CSS as the transition on `left`. We can't use `transionend` event
         // because we're using multiple transition durations on different CSS fields.
         this.walkTransitionDuration = 2000;
@@ -48,7 +48,7 @@ class Scene {
     onload() {
         // Wait to begin Oatchi logic until the Oatchi image and animations have loaded.
         // The DOM is also guaranteed to have been loaded by now.
-
+       
         this.oatchi = document.getElementById("oatchi");
         this.pendingEvent = 0;
         // Referencing elements and setting them into the state's buttons
@@ -58,11 +58,17 @@ class Scene {
         this.state.play.button        = document.getElementById("play");
         this.state.poop.button        = document.getElementById("poop");
 
+        //Get items from local storage
+        // Object.keys(localStorage).forEach((key) => {
+        //     this.state[key].value = localStorage.getItem(key);
+        //     console.log(localStorage.getItem(key));
+        // });
         // Determine on a per-button basis which actions can override other actions.
         this.state.hunger.button.addEventListener("click", () => {
             if (this.isOatchiAvailable())
             {
                 this.oatchiFeed();
+                
             }
         });
         this.state.cleanliness.button.addEventListener("click", () => {
@@ -109,13 +115,18 @@ class Scene {
 
     onunload() {
         // Perform any cleanup or saving tasks here
+        for (const [key, stateObj] of Object.entries(this.state)) {
+            localStorage.setItem(`${key}`, JSON.stringify(stateObj.value));
+        }
     }
 
     //Instead of every action having its own setInterval(), they all share a single once a second update function
     updateScene() {
+        this.onunload();
         // Rather than having separate interval events for each state, subtract a small amount from each state on every tickIncrement
         if (this.state.hunger.value > 0){
             this.state.poop.tickIncrement = -this.state.hunger.tickIncrement; // pooping is dependent on eating
+            
         }
         else{
             // Can't poop if not fed
@@ -228,6 +239,7 @@ class Scene {
             this.set_transition(() => {
                 // Fill up half the hunger bar up to its max at end of animation
                 Scene.incrementStat(this.state.hunger, this.state.hunger.max / 2);
+                this.onunload();
                 this.oatchiGoIdle()
             }, this.feedDuration);
         })
@@ -240,7 +252,7 @@ class Scene {
             this.set_transition(() => {
                 // Pop doesn't leave body until end of animation
                 this.state.poop.value = 0;
-                Scene.incrementStat(this.state.cleanliness, -1);
+                Scene.incrementStat(this.state.cleanliness, -1); //decrement cleanliness by 1 after potty
                 this.oatchiGoIdle();
             }, this.poopDuration);
         })

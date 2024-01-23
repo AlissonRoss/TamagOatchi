@@ -13,7 +13,7 @@ What are some features you struggled with?
 
 Things you learned (working together, working alone, process, content, syntax, etc)
 
-*I learned about transitions between the Idle animation to by removing or adding to the CSS classList. I also had tick() to handle every action update
+*I learned about transitions between the Idle animation to by removing or adding to the CSS classList. I also had ticks to handle every action update
 
 Why did you decide to create the project you did, and why did you choose the languages/libraries/frameworks you used.
 *I choose to make a petgame because I personally really enjoy pet games. The animations were ambitious. 
